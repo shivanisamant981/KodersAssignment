@@ -4,7 +4,7 @@ const Task=require("../models/task.js")
 const router=express.Router();
 
 
-router.post("/",async(req,res)=>{
+router.post("/put",async(req,res)=>{
     try{
         const{title,description}=req.body;
 
@@ -22,5 +22,55 @@ router.post("/",async(req,res)=>{
     }
     
 });
+router.get("/get",async(req,res)=>{
+    try{
+        const tasks=await Task.find().sort({createdAt:-1});
+        res.status(200).json(tasks);
+
+    }catch(error){
+        res.status(500).json({
+            messagr:"Server error",
+            error:error.message,
+        })
+    }
+})
+router.delete("/delete/:id",async(req,res)=>{
+    try{
+        const deleteTask=await Task.findByIdAndDelete(req.params.id);
+
+        if(!deleteTask){
+            return res.status(404).json({message:"task not found"});
+        }
+        res.status(200).json({message:"task deleted successfully"});
+    }catch(error){
+        res.status(500).json({
+            messsage:"server error",
+            error:error.message
+        })
+    }
+})
+
+router.put("/update/:id",async(req,res)=>{
+    try{
+            const {title,description,status}=req.body;
+
+            const updatedTask= await Task.findByIdAndUpdate(
+                req.params.id,
+                {title,description,status},
+                {new:true,runValidation:true}
+            )
+            if(!updatedTask){
+                return res.status(404).json({message:"Task not found"});
+            }
+            res.status(200).json(updatedTask);
+    }
+    catch(error){
+        res.status(500).json({
+            messagee:"Server error",
+            error:error.message,
+        });
+    }
+})
+
 
 module.exports=router

@@ -1,6 +1,6 @@
 Basic Local Setup intructions
 
-
+### Kindly see Screenshots and Video folder for the demo of the website
 
 ### 1) Clone the repository
 ```bash

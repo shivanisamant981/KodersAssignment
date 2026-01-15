@@ -81,11 +81,16 @@ function App() {
 
   return (
     <>
+     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 px-4 py-8 to-black text-white"
+
+>
+  <div className="w-full max-w-2xl mx-auto"></div> 
+
       <div className="text-4xl text-center">Task Manager</div>
       <div className="flex flex-col items-center justify-center gap-4 mt-3 pt-3 bg-center">
         <div>
           <input
-            className="w-200 text-center border border-gray-400 p-2 rounded mb-4 "
+            className="w-200 font-bold text-white text-center border border-gray-400 p-2 rounded mb-4 "
             value={title}
             type="text"
             placeholder="enter the title"
@@ -95,7 +100,7 @@ function App() {
 
         <div>
           <input
-            className="w-200 text-center border border-gray-400 p-2 rounded mb-4 "
+            className="w-200 font-bold text-white text-center border border-gray-400 p-2 rounded mb-4 "
             value={description}
             type="text"
             placeholder="enter the description"
@@ -156,6 +161,8 @@ function App() {
           ))
         )}
       </div>
+      </div>
+      
     </>
   );
 }

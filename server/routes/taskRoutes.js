@@ -34,7 +34,7 @@ router.get("/",async(req,res)=>{
         })
     }
 })
-router.delete("/:id",async(req,res)=>{
+router.delete("/delete/:id",async(req,res)=>{
     try{
         const deleteTask=await Task.findByIdAndDelete(req.params.id);
 

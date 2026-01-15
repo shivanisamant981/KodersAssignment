@@ -43,6 +43,15 @@ function App() {
       alert("Failed to toggle status");
     }
   };
+  const handleDeleteTask = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/tasks/delete/${id}`);
+      fetchTasks();
+    } catch (error) {
+      console.log("Delete error", error.message);
+      alert("failed to delete task");
+    }
+  };
 
   return (
     <>
@@ -91,14 +100,25 @@ function App() {
                 <h2 className="text-lg font-bold">{task.title}</h2>
                 <p className="text-gray-600">{task.description}</p>
               </div>
-              <button
-                onClick={() => handleToggleStatus(task._id)}
-                className={`px-4 py-2 rounded-full text-white font-semibold ${
-                  task.status === "Pending" ? "bg-red-500" : "bg-green-600"
-                }`}
-              >
-                {task.status}
-              </button>
+
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => handleToggleStatus(task._id)}
+                  className={`px-4 py-2 rounded-full text-white font-semibold ${
+                    task.status === "Pending" ? "bg-red-500" : "bg-green-600"
+                  }`}
+                >
+                  {task.status}
+                </button>
+                <button
+                  onClick={() => handleDeleteTask(task._id)}
+                  className="px-4 py-2 rounded-full
+               bg-orange-600 text-white font-semibold hover:bg-gray-800"
+                >
+                  {" "}
+                  Delete{" "}
+                </button>
+              </div>
             </div>
           ))
         )}

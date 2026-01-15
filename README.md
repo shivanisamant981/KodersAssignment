@@ -35,10 +35,10 @@ npm run dev
 ## Screenshots
 
 ### taskadd
-![Task Manager UI](screenshots/taskadd.png)
+![Task Manager UI](Screenshots/taskadd.png)
 
 ### Toggle Status (Pending/Completed)
-![Toggle Status](screenshots/completed.png)
+![Toggle Status](Screenshots/completed.png)
 
 
 

@@ -6,6 +6,7 @@ function App() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [editTask, setEditTask] = useState(null);
 
   const fetchTasks = async () => {
     try {
@@ -52,6 +53,31 @@ function App() {
       alert("failed to delete task");
     }
   };
+  const handleEditClick = (task) => {
+    setEditTask(task);
+    setTitle(task.title);
+    setDescription(task.description);
+  };
+  const handleUpdateTask = async () => {
+    try {
+      await axios.put(
+        `http://localhost:5000/api/tasks/update/${editTask._id}`,
+        {
+          title,
+          description,
+          status: editTask.status, // keep same status
+        }
+      );
+
+      setEditTask(null);
+      setTitle("");
+      setDescription("");
+      fetchTasks();
+    } catch (err) {
+      console.log("Update error", err.message);
+      alert("Failed to update task");
+    }
+  };
 
   return (
     <>
@@ -78,11 +104,12 @@ function App() {
         </div>
         <div>
           <button
-            className="w-200 max-w-md md:max-w-xl lg:max-w-3xl bg-sky-600 text-white py-2 rounded-full mb-6 hover:bg-sky-700 transition"
-            onClick={handleTasks}
-          >
-            Add todo
-          </button>{" "}
+  className="w-[200px] max-w-md md:max-w-xl lg:max-w-3xl bg-sky-600 text-white py-2 rounded-full mb-6 hover:bg-sky-700 transition"
+  onClick={editTask ? handleUpdateTask : handleTasks}
+>
+  {editTask ? "Update Task" : "Add Todo"}
+</button>
+{" "}
           <br />
         </div>
       </div>
@@ -117,6 +144,12 @@ function App() {
                 >
                   {" "}
                   Delete{" "}
+                </button>
+                <button
+                  onClick={() => handleEditClick(task)}
+                  className="px-4 py-2 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700 transition"
+                >
+                  Edit
                 </button>
               </div>
             </div>

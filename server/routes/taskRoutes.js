@@ -4,7 +4,7 @@ const Task=require("../models/task.js")
 const router=express.Router();
 
 
-router.post("/put",async(req,res)=>{
+router.post("/",async(req,res)=>{
     try{
         const{title,description}=req.body;
 
@@ -22,7 +22,7 @@ router.post("/put",async(req,res)=>{
     }
     
 });
-router.get("/get",async(req,res)=>{
+router.get("/",async(req,res)=>{
     try{
         const tasks=await Task.find().sort({createdAt:-1});
         res.status(200).json(tasks);
@@ -34,7 +34,7 @@ router.get("/get",async(req,res)=>{
         })
     }
 })
-router.delete("/delete/:id",async(req,res)=>{
+router.delete("/:id",async(req,res)=>{
     try{
         const deleteTask=await Task.findByIdAndDelete(req.params.id);
 

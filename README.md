@@ -15,7 +15,7 @@ npm install
 
 ```
 ### 2) Add manually the .env file in backend
-PORT=5000
+PORT=5000<br/>
 MONGO_URI=<your_local_host_uri_OR_Cluster_uri>
 
 ### 3) Start frontend and backend

@@ -32,5 +32,15 @@ nodemon index.js
 ```bash
 npm run dev
 
+## Screenshots
+
+### taskadd
+![Task Manager UI](screenshots/taskadd.png)
+
+### Toggle Status (Pending/Completed)
+![Toggle Status](screenshots/completed.png)
+
+
+
 
 
